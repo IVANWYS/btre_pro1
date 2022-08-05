@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+
 
 <section id="showcase-inner" class="py-5 text-white">
   <div class="container">
@@ -20,14 +23,13 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="{% url 'index' %}"> <i class="fas fa-home"></i> Home</a>
+            <a href="{% url 'index' %}"> <i class="fas fa-home"></i> Home</a>
         </li>
         <li class="breadcrumb-item active">About</li>
       </ol>
     </nav>
   </div>
 </section>
-
 <section id="about" class="py-4">
   <div class="container">
     <div class="row">
@@ -37,7 +39,7 @@
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt,
           pariatur!
         </p>
-        <img src="assets/img/about.jpg" alt="" />
+        <img src="{% static 'img/about.jpg' %}" alt="" />
         <p class="mt-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
           esse officia repudiandae ad saepe ex, amet neque quod accusamus rem
@@ -47,21 +49,22 @@
         </p>
       </div>
       <div class="col-md-4">
+        
+        {% if mvp_realtors %}
+        {% for realtor in mvp_realtors %}
         <div class="card">
           <img
             class="card-img-top"
-            src="assets/img/realtors/kyle.jpg"
-            alt="Seller of the month"
+            src="{{realtor.photo.url}}"
+            alt="Sellers of the month"
           />
           <div class="card-body">
-            <h5 class="card-title">Seller Of The Month</h5>
-            <h6 class="text-secondary">Kyle Brown</h6>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-              nesciunt amet, illo itaque similique repellat. content.
-            </p>
-          </div>
+            <h5 class="card-title">Sellers Of The Month</h5>
+            <h6 class="text-secondary">{{realtor.name}}</h6>
+            <p class="card-text">{{realtor.desciptopn}}</p>
+           </div>
         </div>
+        {% endfor %} {% endif %}
       </div>
     </div>
   </div>
@@ -85,48 +88,24 @@
   <div class="container">
     <h2 class="text-center">Our Team</h2>
     <div class="row text-center">
+      {% if realtors %}
+      {% for realtor in realtors %}
       <div class="col-md-4">
-        <img
-          src="assets/img/realtors/kyle.jpg"
-          alt=""
-          class="rounded-circle mb-3"
-        />
-        <h4>Kyle Brown</h4>
-        <p class="text-success">
-          <i class="fas fa-award text-success mb-3"></i> Realtor
-        </p>
-        <hr />
-        <p><i class="fas fa-phone"></i> (555)-555-5555</p>
-        <p><i class="fas fa-envelope-open"></i> kyle@btrealestate.co</p>
+        <img src="{{ realtor.photo.url }}" alt=""
+        class="rounded-circle mb-3" />
+        <h4>{{ realtor.name}}</h4>
+          <p class="text-success">Realtor</p>
+          <hr />
+          <p><i class="fas fa-phone"></i> {{realtor.phone}}</p>
+          <p><i class="fas fa-envelope-open"></i> {{ realtor.email}}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-md-12">
+          <p> No Realtors Availabe</p>
+        </div>
+        {% endif %}
       </div>
-
-      <div class="col-md-4">
-        <img
-          src="assets/img/realtors/mark.jpg"
-          alt=""
-          class="rounded-circle mb-3"
-        />
-        <h4>Mark Hudson</h4>
-        <p class="text-success">Realtor</p>
-        <hr />
-        <p><i class="fas fa-phone"></i> (444)-444-4444</p>
-        <p><i class="fas fa-envelope-open"></i> mark@btrealestate.co</p>
-      </div>
-
-      <div class="col-md-4">
-        <img
-          src="assets/img/realtors/jenny.jpg"
-          alt=""
-          class="rounded-circle mb-3"
-        />
-        <h4>Jenny Johnson</h4>
-        <p class="text-success">Realtor</p>
-        <hr />
-        <p><i class="fas fa-phone"></i> (333)-333-3333</p>
-        <p><i class="fas fa-envelope-open"></i> jenny@btrealestate.co</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 {% endblock %}

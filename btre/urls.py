@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# path of urlpatterns put the lower access to the bottom
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),

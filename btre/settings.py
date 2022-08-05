@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c(6%x@=8@5k+$@-pty8&+b^ay*3fw4l!8w=-5+_-y1+iw%y0$a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # Turn on when production
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [] 
 
 
-# Application definition
+# Application definition # register APPs below
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'pages.apps.PagesConfig',
     'listings.apps.ListingsConfig',
     'realtors.apps.RealtorsConfig',
 ]
+ # Middleware could be ignored at the moment
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'btre.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', #added _psycopg2
         'NAME': 'btredb',
         'USER': 'postgres',
         'PASSWORD':'19921005',
